@@ -16,6 +16,11 @@ import { ThemeHelpersService } from './helpers/theme-helpers/theme-helpers.servi
 // External Modules
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
+// Firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -27,6 +32,8 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     AuthModule,
     ViewsModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
   ],
   providers: [
     ThemeHelpersService

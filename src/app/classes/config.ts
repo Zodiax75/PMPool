@@ -1,6 +1,6 @@
 export class Config {
     public static APP = {
-        title: 'AdminBSBTheme - Angular 4',
+        title: 'PM Pool Dashboard',
         version: '0.0.1',
         author: 'Sunny',
         copyright: {
