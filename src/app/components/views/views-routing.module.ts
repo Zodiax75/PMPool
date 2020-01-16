@@ -111,7 +111,7 @@ const viewsRoutes: Routes = [
         { path: 'medias/carousel', component: CarouselComponent },
         { path: 'blank', component: BlankComponent },
         { path: 'pages/profile', component: ProfileComponent },
-        { path: '', redirectTo: 'home', pathMatch: 'full' }
+        { path: '', redirectTo: 'home', pathMatch: 'full' },
     ]
   }
 ];

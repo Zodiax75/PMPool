@@ -2,11 +2,11 @@ export class Config {
     public static APP = {
         title: 'PM Pool Dashboard',
         version: '0.0.1',
-        author: 'Sunny',
+        author: 'Martin Nassler',
         copyright: {
-            year: '2017',
-            owner: 'Sunny Gohil @ SVS IT Solutions',
-            url: 'http://example.com'
+            year: '2020',
+            owner: 'Československá obchodní banka',
+            url: 'http://www.csob.cz'
         }
     };
     public static THEME = {
@@ -15,6 +15,6 @@ export class Config {
         views: 'theme-red'
     };
     public static API = {
-        endpoint: 'http://localhost:3000'
+        endpoint: 'http://localhost:4200'
     };
 }
