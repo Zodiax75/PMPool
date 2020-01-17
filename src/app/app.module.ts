@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -15,27 +16,28 @@ import { ThemeHelpersService } from './helpers/theme-helpers/theme-helpers.servi
 // External Modules
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
-// Firebase
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from '../environments/environment';
+// import general components
+import { CoreModule } from './core/core.module';
+
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    FlashMessagesModule.forRoot(),
-    AuthModule,
-    ViewsModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
-  ],
-  providers: [
-    ThemeHelpersService
-  ],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent
+   ],
+   imports: [
+      BrowserModule,
+      FlashMessagesModule.forRoot(),
+      AuthModule,
+      ViewsModule,
+      CoreModule,
+      AppRoutingModule,
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+   ],
+   providers: [
+      ThemeHelpersService
+   ],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }
