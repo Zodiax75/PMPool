@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 // Main Modules
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './components/auth/auth.module';
-import { LandingModule } from './components/landing/landing.module';
 import { ViewsModule } from './components/views/views.module';
 
 // Main Components
@@ -28,7 +27,6 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     FlashMessagesModule.forRoot(),
-    LandingModule,
     AuthModule,
     ViewsModule,
     AppRoutingModule,
