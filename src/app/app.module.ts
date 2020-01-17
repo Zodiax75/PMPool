@@ -1,4 +1,3 @@
-import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -19,7 +18,6 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 // import general components
 import { CoreModule } from './core/core.module';
 
-
 @NgModule({
    declarations: [
       AppComponent
@@ -30,8 +28,7 @@ import { CoreModule } from './core/core.module';
       AuthModule,
       ViewsModule,
       CoreModule,
-      AppRoutingModule,
-      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AppRoutingModule
    ],
    providers: [
       ThemeHelpersService
