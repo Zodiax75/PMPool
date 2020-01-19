@@ -12,10 +12,10 @@
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                     <ul class="dropdown-menu pull-right">
-                        <li><a href="javascript:void(0);"><i class="material-icons">person</i>Přihlásit</a></li>
+                        <li><a [routerLink]="['/auth/login']"><i class="material-icons">person</i>Přihlásit</a></li>
                         <li role="seperator" class="divider"></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">lock</i>Registrovat</a></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">redo</i>Obnovit heslo?</a></li>
+                        <li><a [routerLink]="['/auth/register']"><i class="material-icons">lock</i>Registrovat</a></li>
+                        <li><a [routerLink]="['/auth/forgot']"><i class="material-icons">redo</i>Obnovit heslo?</a></li>
                     </ul>
                 </div>
             </div>
@@ -45,6 +45,10 @@
                 </li>
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <a [routerLink]="['/views/typography']"><i class="material-icons">event</i> <span>Týmové akce</span></a>
+                </li>
+                <li class="header">NASTAVENÍ</li>
+                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a [routerLink]="['/views/home']"><i class="material-icons">build</i> <span>Nastavení</span></a>
                 </li>
             </ul>
         </div>

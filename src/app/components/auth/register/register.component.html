@@ -1,26 +1,34 @@
 <div class="signup-box">
+    <div class="align-center m-b-30">
+        <img src="../../../../assets/images/csob-logo-white.png" height="80px">
+    </div>
     <div class="logo">
-        <a href="javascript:void(0);">Admin<b>BSB</b></a>
-        <small>Admin BootStrap Based - Material Design</small>
+        <a [routerLink]="['/']">PM Pool Dashboard</a>
+        <small>Registrační formulář</small>
     </div>
     <div class="card">
         <div class="body">
-            <form id="sign_up" method="POST">
-                <div class="msg">Register a new membership</div>
+            <form #signUpForm="ngForm" id="sign_up" (ngSubmit)="onSubmit(signUpForm) ">
+                <div class="msg">Zaregistrujte se, prosím</div>
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="material-icons">person</i>
                     </span>
                     <div class="form-line">
-                        <input type="text" class="form-control" name="namesurname" placeholder="Name Surname" required autofocus>
+                        <input type="text" #namesurname="ngModel" class="form-control" name="namesurname" id="namesurname" ngModel placeholder="Jméno a příjmení" autofocus required>
                     </div>
+                    <div *ngIf="namesurname.touched">
+                        <p *ngIf="namesurname.errors?.required">First Name is Required!!!</p>
+                        <p *ngIf="namesurname.errors?.minlength">First Name minimum 3 characters are required!!!</p>
+                        <p *ngIf="namesurname.errors?.maxlength">First Name max length is 10!!!</p>
+                      </div>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="material-icons">email</i>
                     </span>
                     <div class="form-line">
-                        <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+                        <input type="email" class="form-control" name="email" ngModel #email="ngModel" placeholder="Emailová adresa" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                     </div>
                 </div>
                 <div class="input-group">
@@ -28,26 +36,22 @@
                         <i class="material-icons">lock</i>
                     </span>
                     <div class="form-line">
-                        <input type="password" class="form-control" name="password" minlength="6" placeholder="Password" required>
+                        <input type="password" class="form-control" name="password" #password="ngModel" ngModel minlength="6" placeholder="Heslo" required>
                     </div>
                 </div>
-                <div class="input-group">
+<!--                <div class="input-group">
                     <span class="input-group-addon">
                         <i class="material-icons">lock</i>
                     </span>
                     <div class="form-line">
-                        <input type="password" class="form-control" name="confirm" minlength="6" placeholder="Confirm Password" required>
+                        <input type="password" class="form-control" name="confirm" minlength="6" placeholder="Opakujte heslo" required>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="checkbox" name="terms" id="terms" class="filled-in chk-col-pink">
-                    <label for="terms">I read and agree to the <a href="javascript:void(0);">terms of usage</a>.</label>
-                </div>
-
-                <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">SIGN UP</button>
+ -->                
+                <button class="btn btn-block btn-lg bg-pink waves-effect">ZAREGISTROVAT</button>
 
                 <div class="m-t-25 m-b--5 align-center">
-                    <a [routerLink]="['/auth']">You already have a membership?</a>
+                    <a [routerLink]="['/auth']">Už jste se registrovali?</a>
                 </div>
             </form>
         </div>

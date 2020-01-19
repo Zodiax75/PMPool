@@ -15,8 +15,12 @@ import { ThemeHelpersService } from './helpers/theme-helpers/theme-helpers.servi
 // External Modules
 import { FlashMessagesModule } from 'angular2-flash-messages';
 
-// import general components
-import { CoreModule } from './core/core.module';
+import { environment } from './../environments/environment';
+
+// Import Firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
    declarations: [
@@ -24,10 +28,12 @@ import { CoreModule } from './core/core.module';
    ],
    imports: [
       BrowserModule,
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireAuthModule,
+      AngularFirestoreModule,
       FlashMessagesModule.forRoot(),
       AuthModule,
       ViewsModule,
-      CoreModule,
       AppRoutingModule
    ],
    providers: [

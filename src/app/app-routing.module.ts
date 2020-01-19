@@ -6,7 +6,7 @@ import { NotFoundComponent } from './components/misc/not-found/not-found.compone
 const routes: Routes = [
     {
         path: 'views',
-        loadChildren: () => import('app/components/views/views.module').then(m => m.ViewsModule)
+        loadChildren: () => import('./components/views/views.module').then(m => m.ViewsModule)
     },
     { path: '', redirectTo: '/views/home', pathMatch: 'full' },
     { path: '**', component: NotFoundComponent, pathMatch: 'full' },
