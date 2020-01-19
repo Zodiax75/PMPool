@@ -17,11 +17,6 @@
                     <div class="form-line">
                         <input type="text" #namesurname="ngModel" class="form-control" name="namesurname" id="namesurname" ngModel placeholder="Jméno a příjmení" autofocus required>
                     </div>
-                    <div *ngIf="namesurname.touched">
-                        <p *ngIf="namesurname.errors?.required">First Name is Required!!!</p>
-                        <p *ngIf="namesurname.errors?.minlength">First Name minimum 3 characters are required!!!</p>
-                        <p *ngIf="namesurname.errors?.maxlength">First Name max length is 10!!!</p>
-                      </div>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from './../../../shared/authentication/auth.service';
+import { LoggingService } from './../../../shared/logging/log.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public authService: AuthenticationService,
+    public logService: LoggingService
+  ) { }
 
   ngOnInit() {
     let body = document.getElementsByTagName('body')[0];
@@ -19,4 +25,10 @@ export class LoginComponent implements OnInit {
     body.classList.remove('login-page');    
   }
 
+  // trigger when form is submitted
+  onSubmit(signInForm: NgForm) {
+    this.logService.log('login, onSumbit','uživatel '+signInForm.controls['username'].value+' spustil přihlášení');
+    this.authService.SignIn(signInForm.controls['username'].value, signInForm.controls['password'].value);
+    this.logService.log('login, onSubmit', 'stav přihlášení: '+this.authService.isLoggedIn);
+  }
 }

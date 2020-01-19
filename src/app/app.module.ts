@@ -1,3 +1,5 @@
+import { LoggingService } from './shared/logging/log.service';
+import { AuthenticationService } from './shared/authentication/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -34,10 +36,12 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
       FlashMessagesModule.forRoot(),
       AuthModule,
       ViewsModule,
-      AppRoutingModule
+      AppRoutingModule,
    ],
    providers: [
-      ThemeHelpersService
+      ThemeHelpersService,
+      AuthenticationService,
+      LoggingService
    ],
    bootstrap: [
       AppComponent

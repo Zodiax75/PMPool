@@ -1,8 +1,6 @@
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RegisterComponent } from './register/register.component';
-import { AuthenticationService } from './../../core/Authentication/auth.service';
-import { LoggingService } from './../../core/Log/log.service';
 import { FormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { NgModule } from '@angular/core';
@@ -14,8 +12,6 @@ import { AuthComponent } from './auth.component';
     CommonModule,
     AuthRoutingModule,
     FormsModule,
-    LoggingService,
-    AuthenticationService
   ],
   declarations: [
     AuthComponent,
