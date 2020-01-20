@@ -2,6 +2,7 @@ import { LoggingService } from './../../../shared/logging/log.service';
 import { AuthenticationService } from './../../../shared/authentication/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,8 @@ import { NgForm } from '@angular/forms';
 export class RegisterComponent implements OnInit {
   constructor(
     public authService: AuthenticationService,
-    public logService: LoggingService
+    public logService: LoggingService,
+    public router: Router
   ) {
   }
 
@@ -22,12 +24,15 @@ export class RegisterComponent implements OnInit {
 
   ngOnDestroy() {
     let body = document.getElementsByTagName('body')[0];
-    body.classList.remove('signup-page');    
+    body.classList.remove('signup-page');
   }
 
   // trigger when form is submitted
   onSubmit(signUpForm: NgForm) {
     this.logService.log('registr, onSumbit','uživatel '+signUpForm.controls['email'].value+' spustil založení');
     this.authService.SignUp(signUpForm.controls['email'].value, signUpForm.controls['password'].value);
+
+    // nagivate to main page
+    this.router.navigate(['/']);
   }
 }
