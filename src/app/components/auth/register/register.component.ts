@@ -1,8 +1,10 @@
+import { UserCustomData } from './../../../classes/UserCustomData';
 import { LoggingService } from './../../../shared/logging/log.service';
 import { AuthenticationService } from './../../../shared/authentication/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from "@angular/router";
+import { collectExternalReferences } from '@angular/compiler';
 
 @Component({
   selector: 'app-register',
@@ -10,6 +12,8 @@ import { Router } from "@angular/router";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  userDatas: UserCustomData[];
+    
   constructor(
     public authService: AuthenticationService,
     public logService: LoggingService,
@@ -29,10 +33,35 @@ export class RegisterComponent implements OnInit {
 
   // trigger when form is submitted
   onSubmit(signUpForm: NgForm) {
-    this.logService.log('registr, onSumbit','uživatel '+signUpForm.controls['email'].value+' spustil založení');
-    this.authService.SignUp(signUpForm.controls['email'].value, signUpForm.controls['password'].value);
 
-    // nagivate to main page
-    this.router.navigate(['/']);
+    // načti data z formuláře
+    const email = signUpForm.controls['email'].value;
+    const passwd = signUpForm.controls['password'].value;
+    const namesurname = signUpForm.controls['namesurname'].value;
+
+    // vytvoř kolekci pro user custom data
+    // TODO: doladit nacteni custom dat
+    const ucd: UserCustomData = {
+      displayName: namesurname,
+      photoURL: 'picture.jpg',
+      role: 'PM junior',
+      isAdmin: false
+    }
+
+    // založ uživatele
+    this.logService.log('registr, onSumbit','uživatel '+email+' spustil založení');
+
+    this.authService.SignUp(email, passwd, ucd)
+      .then((result) => {
+        // TODO: okno s informativní hláškou co po chvíli zmizí
+        this.logService.log('registr, onSumbit','uživatel '+email+' založen a přihlášen');
+
+        // nagivate to main page
+        this.router.navigate(['/']);    
+      })
+      .catch((e) => {
+        // TODO: okno s chybovou hláškou
+        this.logService.log('registr, onSumbit','založení uživatele '+email+' selhalo. '+e.message);
+      })  
   }
 }

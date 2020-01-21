@@ -1,14 +1,14 @@
 {
-  "name": "adminbsbmaterial-angular",
-  "description": "Angular 4 version of the popular AdminBSB material design theme by Güray Yarar",
+  "name": "pmpooldashboard",
+  "description": "PM Pool dashboard based on SBS Admin template",
   "version": "0.0.1",
   "license": "MIT",
   "author": "Sunny Gohil",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sunnyg1210/adminbsbmaterial-ANGULAR.git"
+    "url": "git+https://github.com/Zodiax75/PMPool"
   },
-  "homepage": "https://github.com/sunnyg1210/adminbsbmaterial-ANGULAR#readme",
+  "homepage": "https://github.com/Zodiax75/PMPool#readme",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

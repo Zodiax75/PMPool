@@ -29,11 +29,24 @@ export class LoginComponent implements OnInit {
 
   // trigger when form is submitted
   onSubmit(signInForm: NgForm) {
-    this.logService.log('login, onSumbit','uživatel '+signInForm.controls['username'].value+' spustil přihlášení');
-    this.authService.SignIn(signInForm.controls['username'].value, signInForm.controls['password'].value);
-    this.logService.log('login, onSubmit', 'stav přihlášení: '+this.authService.isLoggedIn);
+    // načti data z formuláře
+    const username = signInForm.controls['username'].value;
+    const passwd = signInForm.controls['password'].value;
 
-    // nagivate to main page
-    this.router.navigate(['/']);
+    // přihlaš uživatele
+    this.logService.log('login, onSumbit','uživatel '+username+' spustil přihlášení');
+
+    this.authService.SignIn(username,passwd)
+      .then((result) => {
+        // TODO: okno s informativní hláškou co po chvíli zmizí
+        this.logService.log('login, onSubmit', 'stav přihlášení uživatele '+this.authService.currentUser.email+': '+this.authService.isLoggedIn);
+
+        // nagivate to main page
+        this.router.navigate(['/']);
+      })
+    .catch((e) =>{
+      // TODO: okno s chybovou hláškou
+      this.logService.log('login, onSumbit','přihlášení uživatele '+username+' selhalo. '+e.message);
+    })
   }
 }

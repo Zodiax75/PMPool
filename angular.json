@@ -27,14 +27,19 @@
               "node_modules/animate.css/animate.min.css",
               "src/assets/css/style.css",
               "src/assets/css/all-themes.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/materialize.css",
+              "src/assets/css/bootstrap-select.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
               "node_modules/node-waves/dist/waves.min.js",
-              "src/assets/js/admin.js"
+              "src/assets/js/admin.js",
+              "src/assets/js/bootstrap-notify.min.js",
+              "src/assets/js/bootstrap-select.min.js",
+              "src/assets/js/notifications.js"
             ]
           },
           "configurations": {

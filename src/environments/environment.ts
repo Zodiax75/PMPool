@@ -6,12 +6,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyBNe55Aas-U51r5oXRGPQhxURRhV1y2U7o",
-    authDomain: "pmpool3-dashboard-cd055.firebaseapp.com",
-    databaseURL: "https://pmpool3-dashboard-cd055.firebaseio.com",
-    projectId: "pmpool3-dashboard-cd055",
-    storageBucket: "pmpool3-dashboard-cd055.appspot.com",
-    messagingSenderId: "725139202707",
-    appId: "1:725139202707:web:80c756e8c9aa3c7876e366"
+    apiKey: "AIzaSyDsGGp6UTABNsqPVatczKOpLi9qfvmSEWU",
+    authDomain: "pmpooldashboard-1746b.firebaseapp.com",
+    databaseURL: "https://pmpooldashboard-1746b.firebaseio.com",
+    projectId: "pmpooldashboard-1746b",
+    storageBucket: "pmpooldashboard-1746b.appspot.com",
+    messagingSenderId: "514895003505",
+    appId: "1:514895003505:web:bc18c1cbc0140f2d3ec0d0"
   }
 };

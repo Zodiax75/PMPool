@@ -22,59 +22,119 @@ export class AuthenticationService {
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     public logServ: LoggingService
   ) {
-      this.SubscribeUser();
+    // ! REP
+      // this.SubscribeUser();
     }
 
  /* Saving user data in localstorage when logged in and setting up null when logged out */
-  SubscribeUser() {
+  SubscribeUser(custData: UserCustomData) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
+        localStorage.setItem('userCustData', JSON.stringify(custData));
         JSON.parse(localStorage.getItem('user'));
+        JSON.parse(localStorage.getItem('userCustData'));
         this.logServ.log('auth_serv, constructor','user '+user.email+' uložen v paměti');
       } else {
         localStorage.setItem('user', null);
+        localStorage.setItem('userCustData', null);
         JSON.parse(localStorage.getItem('user'));
         this.logServ.log('auth_serv, constructor','user vymazán z paměti');
       }
     });
   }
 
+  // ulož uživatelská data lokálně do paměti
+  saveUserLocally(user: any, custData: UserCustomData) {
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('userCustData', JSON.stringify(custData));
+  }
 
   // Sign in with email/password
   SignIn(email, password) {
-    // odhlásit uživatele před přihlášením
-    this.SignOut();
-
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
         });
-        this.SetUserData(result.user);
         this.logServ.log('auth_serv, sign in','user '+email+' přihlášen');
-        this.SubscribeUser();
       }).catch((error) => {
         this.logServ.log('auth_serv, sign in','chyba při přihlášení. '+error.message);
       })
   }
 
   // Sign up with email/password
-  SignUp(email, password) {
-    // odhlaš uživatele před registrací
-    this.SignOut();
-
+  SignUp(email: string, password: string, userData: UserCustomData) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
+        this.logServ.log('auth_serv, sign up','Uživatel '+result.user.email+' vytvořen v databázi');
+        
+        // ulož uživatele do localstore
+        this.saveUserLocally(result.user, userData);
+        this.logServ.log('auth_serv, sign up','Uživatel '+result.user.email+' uložen v localstore');
+
         // ? Je potřeba verifikaci emailem?
         // TODO: vyřešit verifikaci emailem
         /* Call the SendVerificaitonMail() function when new user sign up and returns promise */
         // this.SendVerificationMail();
-        this.SetUserData(result.user);
-        this.logServ.log('auth_serv, sign up','user '+email+' vytvořen');
-      }).catch((error) => {
-        this.logServ.log('auth_serv, sign up','chyba při přihlášení. '+error.message);
+        
+        // ulož custom uživatelská data
+        this.SetUserData(result.user, userData)
+          .then((result1) => {
+            this.logServ.log('auth_serv, sign up','Custom data o uživateli '+result.user.email+' uložena');
+          })
+          .catch((error1) => {
+            const errmsg = 'Chyba ukládání custom dat uřivatele '+result.user.email+'. '+error1.message;
+            this.logServ.log('auth_serv, sign up',errmsg);
+            error1.message = errmsg;
+            throw error1;
+          })
       })
+      .catch((error) => {
+        const errmsg = 'chyba při vytvoření uživatele. '+error.message;
+        this.logServ.log('auth_serv, sign up',errmsg);
+        error.message = errmsg;
+        throw error;
+      })
+  }
+
+  // Vrací data aktuálního uživatele nebo null pokud není přihlášen00
+  get currentUser(): User {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const userCust = JSON.parse(localStorage.getItem('userCustData'));
+    
+    // inicializuj uživatele
+    var currUser: User = {
+      uid: '',
+      email: '',
+      customData: {
+        displayName: '',
+        photoURL: '',
+        role: '',
+        isAdmin: false
+      }
+    }
+
+    if(user !== null && userCust !== null) {
+      currUser.email = user.email;
+      currUser.customData.displayName = userCust.displayName;
+      currUser.customData.isAdmin = userCust.isAdmin;
+      currUser.customData.photoURL = userCust.photeURL;
+      currUser.customData.role = userCust.role;
+    } else {
+      currUser = null;
+    } 
+
+    // TODO: vyresit priznak verifikace emailu
+    return (currUser);
+    //return (user !== null && user.emailVerified !== false) ? user : null;
+  }
+
+/* Setting up user data when sign in with username/password,
+  sign up with username/password and sign in with social auth
+  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+  SetUserData(user: any, usd: UserCustomData) {
+    return this.afs.collection('UserCustomData').doc(user.email).set(usd);
   }
 
   // Send email verfificaiton when new user sign up
@@ -105,37 +165,14 @@ export class AuthenticationService {
     //return (user !== null && user.emailVerified !== false) ? true : false;
   }
 
-  // Vrací data aktuálního uživatele nebo null pokud není přihlášen00
-  get currentUser(): User {
-    const user = JSON.parse(localStorage.getItem('user'));
-    // TODO: vyresit priznak verifikace emailu
-    return (user !== null) ? user : null;
-    //return (user !== null && user.emailVerified !== false) ? user : null;
-  }
-
-  /* Setting up user data when sign in with username/password,
-  sign up with username/password and sign in with social auth
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`usersData/${user.id}`);
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified
-    }
-
-    var result = userRef.set(userData, {merge: true});
-    this.logServ.log('auth_serv, set user data','Data o uživateli uložena');
-    return result;
-  }
-
   // Sign out
   SignOut() {
     return this.afAuth.auth.signOut().then(() => {
+      const usr_email = this.currentUser.email;
+
       localStorage.removeItem('user');
-      this.logServ.log('auth_serv, sign out','Uživatel odhlášen a vymazán z local storage');
+      localStorage.removeItem('userCustData');
+      this.logServ.log('auth_serv, sign out','Uživatel '+usr_email+' odhlášen a vymazán z local storage');
     })
   }
 }
