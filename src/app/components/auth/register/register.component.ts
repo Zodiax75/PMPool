@@ -6,6 +6,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from "@angular/router";
 import { collectExternalReferences } from '@angular/compiler';
 
+declare function showNotification(colorName, text, placementFrom, placementAlign, animateEnter, animateExit) : any;
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,7 +15,7 @@ import { collectExternalReferences } from '@angular/compiler';
 })
 export class RegisterComponent implements OnInit {
   userDatas: UserCustomData[];
-    
+
   constructor(
     public authService: AuthenticationService,
     public logService: LoggingService,
@@ -53,15 +55,15 @@ export class RegisterComponent implements OnInit {
 
     this.authService.SignUp(email, passwd, ucd)
       .then((result) => {
-        // TODO: okno s informativní hláškou co po chvíli zmizí
+        showNotification('alert-success', 'Registrace uživatele '+email+' proběhla úspěšně', 'bottom', 'center', 'animated zoomIn', 'animated zoomOut');
         this.logService.log('registr, onSumbit','uživatel '+email+' založen a přihlášen');
 
         // nagivate to main page
-        this.router.navigate(['/']);    
+        this.router.navigate(['/']);
       })
       .catch((e) => {
-        // TODO: okno s chybovou hláškou
         this.logService.log('registr, onSumbit','založení uživatele '+email+' selhalo. '+e.message);
-      })  
+        showNotification('alert-danger', 'Registrace uživatele '+email+' se nezdařila!', 'bottom', 'center', 'animated zoomIn', 'animated zoomOut');
+      })
   }
 }
