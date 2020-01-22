@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
       })
       .catch((e) => {
         this.logService.log('registr, onSumbit','založení uživatele '+email+' selhalo. '+e.message);
-        showNotification('alert-danger', 'Registrace uživatele '+email+' se nezdařila!', 'bottom', 'center', 'animated zoomIn', 'animated zoomOut');
+        showNotification('alert-danger', 'Registrace uživatele '+email+' se nezdařila!<BR><smail>'+e.message+'</smail>', 'bottom', 'center', 'animated fadeInUp', 'animated fadeInOut');
       })
   }
 }

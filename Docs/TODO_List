@@ -1,11 +1,12 @@
 X Spravne ulozeni custom dat
 X Spravne ulozeni uzivatele a custom dat v local session
 X Atomicita zalození uživatele
+X změna rozložení login, signup, profile, logout na ikony
 - hlídání duplicity emailu při registraci
 - dokončení formuláře pro registraci + validace polí
-- informační panel pro registraci a přihlášení (případně i pro výsledek) 
+X informační panel pro registraci a přihlášení (případně i pro výsledek) 
 X správné nastavení uživatele po přihlášení/registraci (dashboard)
-- změna rozložení login, signup, profile, logout na ikony a do hlavního menu
 - Přihlášení uživatele a načtení custom dat
-- odhlášení uživatele
+- Authentication guard a použití na Routes
+X odhlášení uživatele
 - načtení a zobrazení statistických dat pro anonymní dashboard
