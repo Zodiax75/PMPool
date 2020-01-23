@@ -2,7 +2,7 @@ X Spravne ulozeni custom dat
 X Spravne ulozeni uzivatele a custom dat v local session
 X Atomicita zalození uživatele
 X změna rozložení login, signup, profile, logout na ikony
-- hlídání duplicity emailu při registraci
+- hlídání duplicity emailu při registraci - napojení na DB
 X dokončení formuláře pro registraci + validace polí
 - vizualizace chybně vyplněných polí
 X informační panel pro registraci a přihlášení (případně i pro výsledek) 
