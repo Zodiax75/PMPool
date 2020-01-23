@@ -61,7 +61,9 @@ export class CustomvalidationService {
   // ověř existenci emailu v DB
   validateUserName(userName: string) {
     // TODO: dodělat vazbu na Firebase
-    const UserList = ['ankit', 'admin', 'user', 'superuser'];
-    return (UserList.indexOf(userName) > -1);
+    const UserList = ['m@m.m', 'martin.nassler@gmail.com', 'mar@mar.com'];
+    const found = UserList.indexOf(userName);
+   
+    return (found > -1);
   }
 }

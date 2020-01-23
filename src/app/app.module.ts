@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoggingService } from './shared/logging/log.service';
 import { AuthenticationService } from './shared/authentication/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -37,6 +38,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
       AuthModule,
       ViewsModule,
       AppRoutingModule,
+      FormsModule,
+      ReactiveFormsModule
    ],
    providers: [
       ThemeHelpersService,
