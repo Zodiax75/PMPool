@@ -8,30 +8,42 @@
     </div>
     <div class="card">
         <div class="body">
-            <form id="sign_in" #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm) ">
-                <div class="msg">Prosím, přihlašte se</div>
+            <form id="sign_in" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+                <div class="msg">Přihlaste se, prosím</div>
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <i class="material-icons">person</i>
+                        <i class="material-icons">email</i>
                     </span>
                     <div class="form-line">
-                        <input type="text" ngModel #username="ngModel" class="form-control" name="username" placeholder="Email" required autofocus>
+                        <input type="email" class="form-control" formControlName="email" name="email" placeholder="Emailová adresa">
                     </div>
+                    <span class="text-danger" *ngIf="loginFormControl.email.touched && loginFormControl.email.errors?.required">
+                        <small>Emailová adresa je povinné pole</small>
+                    </span>
+                    <span class="text-danger" *ngIf="loginFormControl.email.touched && loginFormControl.email.errors?.email">
+                        <small>Neplatný formát emailové adresy</small>
+                    </span>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="material-icons">lock</i>
                     </span>
                     <div class="form-line">
-                        <input type="password" class="form-control" ngModel #password="ngModel" name="password" placeholder="Heslo" required>
+                        <input type="password" class="form-control" formControlName="password" name="password" placeholder="Heslo">
                     </div>
+                    <span class="text-danger" *ngIf="loginFormControl.password.touched && loginFormControl.password.errors?.required">
+                        <small>Heslo je povinné pole</small>
+                    </span>
+                    <span class="text-danger" *ngIf="loginFormControl.password.touched && loginFormControl.password.errors?.invalidPassword">
+                        <small>Heslo musí mít minimálně 8 znaků, velké a malé písmeno a číslici.</small>
+                    </span>
                 </div>
                 <div class="row">
-                    <div class="col-xs-8 p-t-5">
+                    <!-- <div class="col-xs-8 p-t-5">
                         <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
                         <label for="rememberme">Zapamatovat si přihlášení?</label>
-                    </div>
-                    <div class="col-xs-4">
+                    </div> -->
+                    <div class="col-xs-12">
                         <button class="btn btn-block bg-pink waves-effect">PŘIHLÁSIT</button>
                     </div>
                 </div>

@@ -25,7 +25,7 @@ function showNotification(colorName, text, placementFrom, placementAlign, animat
             type: colorName,
             allow_dismiss: allowDismiss,
             newest_on_top: true,
-            timer: 5000,
+            timer: 1000,
             placement: {
                 from: placementFrom,
                 align: placementAlign

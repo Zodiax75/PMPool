@@ -1,3 +1,5 @@
+import { ExamplesComponent } from './../../components/views/forms/examples/examples.component';
+import { AuthenticationService } from './../authentication/auth.service';
 import { Injectable } from '@angular/core';
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -8,7 +10,11 @@ import { FormGroup } from '@angular/forms';
 })
 export class CustomvalidationService {
 
-  constructor() { }
+  public userNameNotAvailable: boolean; 
+
+  constructor(
+    private authServ: AuthenticationService
+  ) { }
 
   // validace hesla, zda splnuje pozadavky
   // - min 6 znaku
@@ -46,24 +52,22 @@ export class CustomvalidationService {
   }
 
   // ověření dostupnosti emailu
-  userNameValidator(userControl: AbstractControl) {
+  userNameValidator(userControl: AbstractControl) {  
     return new Promise(resolve => {
       setTimeout(() => {
-        if (this.validateUserName(userControl.value)) {
-          resolve({ userNameNotAvailable: true });
-        } else {
-          resolve(null);
-        }
-      }, 1000);
-    });
-  }
+        this.authServ.validateUserName(userControl.value) 
+          .then((data) => {
+            if(this.authServ.emailTaken) {
+              this.userNameNotAvailable = true; 
+              console.log('VAL: '+userControl.valid );
+              
+            } else {
+              this.userNameNotAvailable = false;
+              console.log('VAL1: '+userControl.valid);
+            }
 
-  // ověř existenci emailu v DB
-  validateUserName(userName: string) {
-    // TODO: dodělat vazbu na Firebase
-    const UserList = ['m@m.m', 'martin.nassler@gmail.com', 'mar@mar.com'];
-    const found = UserList.indexOf(userName);
-   
-    return (found > -1);
+          })
+       }, 1000);
+    });
   }
 }

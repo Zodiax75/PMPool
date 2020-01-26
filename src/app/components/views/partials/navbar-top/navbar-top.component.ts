@@ -26,6 +26,23 @@ export class NavbarTopComponent implements OnInit {
       this.user = this.authService.currentUser;
   }
 
+  logoutUser() {
+    this.logService.log('top_navbar, Logout user','uživatel '+this.user.email+' spustil odhlášení');
+
+    this.authService.SignOut()
+      .then((result) => {
+        showNotification('alert-success', 'Uživatel '+this.user.email+' úspěšně odhlášen', 'bottom', 'center', 'animated zoomIn', 'animated zoomOut');
+        this.logService.log('top_navbar, logout user','Uživatel '+this.user.email+' odhlášen');
+
+        // nagivate to main page
+        this.router.navigate(['/']);
+      })
+      .catch((e) => {
+        this.logService.log('top_navbar, logout user','Odhlášení uživatele '+this.user.email+' selhalo. '+e.message);
+        showNotification('alert-danger', 'Odhlášení uživatele '+this.user.email+' se nezdařilo!<BR><smail>'+e.message+'</smail>', 'bottom', 'center', 'animated fadeInUp', 'animated fadeInOut');
+      })
+  }
+
   ngOnInit() {
   }
 }

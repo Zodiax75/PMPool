@@ -18,7 +18,7 @@
                 <!-- Cast pro prihlaseneho uzivatele -->
                 <ng-template #loggedUser>
                     <!-- Odhlaseni a profil -->
-                    <li><a href="" title="Logout"><i class="material-icons" (click)="logoutUser()">exit_to_app</i></a></li>
+                    <li><a href="javascript:void(0)" title="Odhlášení" (click)="logoutUser()"><i class="material-icons"  title="Odhlášení">exit_to_app</i></a></li>
                     <li><a [routerLink]="['/auth/profile']" title="Profil uživatele"><i class="material-icons">person_outline</i></a></li>
 
                     <!-- Notifikace a ukoly -->
