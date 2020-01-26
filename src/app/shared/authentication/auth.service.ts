@@ -201,8 +201,6 @@ export class AuthenticationService {
     let user: any;
     let userCust: any;
 
-    console.log('LOGGED: '+this.isLoggedIn);
-
     if(this.isLoggedIn) {
       user = JSON.parse(localStorage.getItem('user'));
       userCust = JSON.parse(localStorage.getItem('userCustData'));
@@ -241,7 +239,9 @@ export class AuthenticationService {
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
-    this.VerifyUserIsLoggedInFirebase();
+    // * Zatím není zapnuto, nakolik přihlášení k Firestore vyprší až po Logoutu.
+    // ! Zapnout pokud budu mít auth.state nastaven na Session
+    //this.VerifyUserIsLoggedInFirebase();
 
     const user = JSON.parse(localStorage.getItem('user'));
     
