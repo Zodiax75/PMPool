@@ -1,5 +1,5 @@
 import { User } from './../../../../classes/user';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Config } from '../../../../classes/config';
 import { AuthenticationService } from './::/../../../::/../../../shared/authentication/auth.service';
 import { LoggingService } from './../../../../shared/logging/log.service';
@@ -12,7 +12,7 @@ declare function showNotification(colorName, text, placementFrom, placementAlign
   templateUrl: './navbar-left.component.html',
   styleUrls: ['./navbar-left.component.css']
 })
-export class NavbarLeftComponent implements OnInit {
+export class NavbarLeftComponent implements OnInit, OnDestroy {
 
   appInfo: any = Config.APP;
   user: User;
@@ -24,12 +24,26 @@ export class NavbarLeftComponent implements OnInit {
   ) {
     // načti aktuálního uživatele
     this.user = this.authService.currentUser;
+
+    // subscribe na odchycení změn v CurrentUserData 
+    // ! používané pouze pro funkci logout, aby se aktualizovala data ohledně uživatele
+    this.authService.CurrentUserData.subscribe( value => {
+      this.user = this.authService.currentUser;
+      this.logService.log('left_navbar, observable','Načtena aktualizovaná data o uživateli');
+    });
    }
 
   ngOnInit() {
+    
   }
 
-  // odhlaš současného uživatele
+  ngOnDestroy() {
+    // unsubscribe z observable
+    this.authService.CurrentUserData.unsubscribe();
+    this.logService.log('left_navbar, ngOnDestroy','Zrušen observable na aktualizaci uživatelských dat');
+  }
+
+  /* // odhlaš současného uživatele
   logoutUser() {
     this.authService.SignOut()
       .then((result) => {
@@ -43,5 +57,5 @@ export class NavbarLeftComponent implements OnInit {
         this.logService.log('navbar_left, logoutUser','uživatel '+this.user.email+' nebyl odhlášen! '+e.message);
         showNotification('alert-danger', 'Odhlášení uživatele '+this.user.email+' se nezdařilo!<BR><smail>'+e.message+'</smail>', 'bottom', 'center', 'animated fadeInUp', 'animated fadeInOut');
       })
-  }
+  } */
 }

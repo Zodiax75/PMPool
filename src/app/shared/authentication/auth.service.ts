@@ -4,7 +4,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { User } from "./../../classes/user";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { take, first } from 'rxjs/operators';
 import { database } from 'firebase';
 
@@ -18,6 +18,7 @@ export class AuthenticationService {
   private userData: any; // Save logged in user data
   public emailTaken: boolean;
   private ucd: UserCustomData;
+  public CurrentUserData: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(
     private afs: AngularFirestore,   // Inject Firestore service

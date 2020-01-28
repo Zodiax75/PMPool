@@ -34,8 +34,12 @@ export class NavbarTopComponent implements OnInit {
         showNotification('alert-success', 'Uživatel '+this.user.email+' úspěšně odhlášen', 'bottom', 'center', 'animated zoomIn', 'animated zoomOut');
         this.logService.log('top_navbar, logout user','Uživatel '+this.user.email+' odhlášen');
 
-        // nagivate to main page
-        this.router.navigate(['/']);
+        // aktualizuj data o uživateli v levém komponentu
+        this.authService.CurrentUserData.next(this.authService.currentUser);
+        this.logService.log('top_navbar, logout user','Aktualizován observable uživatele');
+
+        // aktualizuj uživatelská data
+        this.user = this.authService.currentUser;
       })
       .catch((e) => {
         this.logService.log('top_navbar, logout user','Odhlášení uživatele '+this.user.email+' selhalo. '+e.message);
