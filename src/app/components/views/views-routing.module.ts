@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../shared/authentication/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -61,7 +62,7 @@ const viewsRoutes: Routes = [
       component: ViewsComponent,
       children: [
         { path: 'home', component: HomeComponent },
-        { path: 'typography', component: TypographyComponent },
+        { path: 'typography', component: TypographyComponent, canActivate:[AuthGuard] },
         { path: 'helper-classes', component: HelperClassesComponent },
         { path: 'widgets/cards/basic', component: BasicComponent },
         { path: 'widgets/cards/colored', component: ColoredComponent },

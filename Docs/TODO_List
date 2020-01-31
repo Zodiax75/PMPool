@@ -13,6 +13,7 @@ X vizualizace chybně vyplněných polí Login
 X Přihlášení uživatele a načtení custom dat
 X ověření přihlášení v DB pri isLogged a CurrentUser
 X ověření přihlášení při přístupu na stránky (isLogged, CurrentUser)
-- odhlášení uživatele
-- Authentication guard a použití na Routes
+X odhlášení uživatele
+X Authentication guard a použití na Routes
 - načtení a zobrazení statistických dat pro anonymní dashboard
+- forget password stranka
