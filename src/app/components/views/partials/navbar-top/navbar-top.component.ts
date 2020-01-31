@@ -35,10 +35,10 @@ export class NavbarTopComponent implements OnInit {
         this.logService.log('top_navbar, logout user','Uživatel '+this.user.email+' odhlášen');
 
         // aktualizuj data o uživateli v levém komponentu
-        this.authService.CurrentUserData.next(this.authService.currentUser);
+        this.authService.CurrentUserChangedObservable.next(true);
         this.logService.log('top_navbar, logout user','Aktualizován observable uživatele');
 
-        // aktualizuj uživatelská data
+        // aktualizuj uživatelská data (aby se prehodily ikony login/odhlasit)
         this.user = this.authService.currentUser;
       })
       .catch((e) => {

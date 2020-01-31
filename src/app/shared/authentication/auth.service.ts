@@ -18,7 +18,7 @@ export class AuthenticationService {
   private userData: any; // Save logged in user data
   public emailTaken: boolean;
   private ucd: UserCustomData;
-  public CurrentUserData: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  public CurrentUserChangedObservable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private afs: AngularFirestore,   // Inject Firestore service
