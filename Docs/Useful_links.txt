@@ -1,8 +1,20 @@
 Angular authentication service - https://www.positronx.io/full-angular-7-firebase-authentication-system/
 
-Update component without refresh
-      - https://stackoverflow.com/questions/46047854/how-to-update-a-component-without-refreshing-full-page-angular
-!!    - https://stackoverflow.com/questions/53611625/refreshing-a-component-in-angular-6
-      - https://dzone.com/articles/refresh-angular-component-without-reload-or-naviga
+Charts:
+- https://swimlane.gitbook.io/ngx-charts/
+
+- https://github.com/valor-software/ng2-charts
+      - https://www.positronx.io/angular-chart-js-tutorial-with-ng2-charts-examples/
+
+- https://www.chartjs.org/
+      - http://codeandlearn.in/2019/04/26/chart-js-and-angular-7/
 
 
+
+- https://www.devrandom.it/software/ng2-google-charts/demo/
+- 
+
+
+npm install ng2-charts
+npm install chart.js
+npm install chartjs-plugin-datalabels --save

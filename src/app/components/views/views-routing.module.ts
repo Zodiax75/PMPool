@@ -42,7 +42,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { BootstrapTablesComponent } from './tables/bootstrap-tables/bootstrap-tables.component';
 import { NgxTableComponent } from './tables/ngx-table/ngx-table.component';
 import { Ng2TableComponent } from './tables/ng2-table/ng2-table.component';
-import { NgxComponent } from './charts/ngx/ngx.component';
 import { AdvancedComponent } from './forms/advanced/advanced.component';
 import { EditorsComponent } from './forms/editors/editors.component';
 import { ExamplesComponent } from './forms/examples/examples.component';
@@ -98,7 +97,6 @@ const viewsRoutes: Routes = [
         { path: 'tables/bootstrap', component: BootstrapTablesComponent },
         { path: 'tables/ngx', component: NgxTableComponent },
         { path: 'tables/ng2', component: Ng2TableComponent },
-        { path: 'charts/ngx-charts', component: NgxComponent },
         { path: 'forms/basic', component: BasicFormsComponent },
         { path: 'forms/advanced', component: AdvancedComponent },
         { path: 'forms/editors', component: EditorsComponent },

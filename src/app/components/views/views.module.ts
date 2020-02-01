@@ -1,3 +1,5 @@
+import { ChartsModule } from 'ng2-charts';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -52,7 +54,6 @@ import { WizardComponent } from './forms/wizard/wizard.component';
 import { EditorsComponent } from './forms/editors/editors.component';
 import { ImageGalleryComponent } from './medias/image-gallery/image-gallery.component';
 import { CarouselComponent } from './medias/carousel/carousel.component';
-import { NgxComponent } from './charts/ngx/ngx.component';
 import { BlankComponent } from './pages/blank/blank.component';
 import { GoogleComponent } from './maps/google/google.component';
 import { YandexComponent } from './maps/yandex/yandex.component';
@@ -64,7 +65,8 @@ import { BasicFormsComponent } from './forms/basic-forms/basic-forms.component';
     CommonModule,
     ViewsRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   declarations: [
     ViewsComponent,
@@ -115,7 +117,6 @@ import { BasicFormsComponent } from './forms/basic-forms/basic-forms.component';
     EditorsComponent,
     ImageGalleryComponent,
     CarouselComponent,
-    NgxComponent,
     BlankComponent,
     GoogleComponent,
     YandexComponent,
