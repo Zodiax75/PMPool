@@ -71,7 +71,41 @@
                 </div>    
             </div>
             <div class="body">
-                <div id="real_time_chart" class="dashboard-flot-chart"></div>
+                <div class="lead">
+                    Potřebujete projektového manažera na svoji aktivitu?
+                </div>
+                <p class="col-pink">
+                    <strong>Dejte nám, prosím, vědět pomocí poptávkového formuláře!</strong>
+                </p>
+                <p>
+                    Ideálně dostatečně předem, kapacity bývají blokovány dlouho dopředu. Aktuální stav dostupných kapacit 
+                    můžete orientačně zjistit na grafu "Alokace projektových manažerů" níže. Jakmile budeme mít potřebné info, ozveme se Vám s možnostmi jak roli PM
+                    obsadit.
+                </p>
+                <p>
+                    <span class="font-underline col-grey">Budeme od Vás potřebovat následující informace:</span>
+                </p>
+                <div>
+                    <ul class="col-grey">
+                        <li>Kontakt na Vás nebo sponsora projektu</li>
+                        <li>Název projektu</li>
+                        <li>Trvání projektu (od-do)</li>
+                        <li>Předpokládanou alokaci</li>
+                        <li>
+                            Ideálně:
+                            <ul>
+                                <li>Projektovou kartu</li>
+                                <li>Jméno, pokud preferujete konkrétního PM</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <p>
+                    <button type="button" class="btn btn-block bg-deep-orange waves-effect">
+                        <i class="material-icons">face</i>
+                        <span>ŽÁDOST O PM</span>
+                    </button>  
+                </p>
             </div>
         </div>
     </div>
@@ -97,7 +131,7 @@
                         [legend]="ProjectSuccessRateChartLegend" 
                         [chartType]="ProjectSuccessRateChartType" 
                         [plugins]="ProjectSuccessRateChartPlugins"
-                        height="117px">
+                        height="217px">
                     </canvas>
                 </div>
                 <ul class="dashboard-stat-list">
@@ -172,44 +206,6 @@
     </div>
     <!-- #END# ROLE PM -->
 </div>    
-
-
-    <!-- Answered Tickets -->
-    <!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-        <div class="card">
-            <div class="body bg-teal">
-                <div class="font-bold m-b--35">ANSWERED TICKETS</div>
-                <ul class="dashboard-stat-list">
-                    <li>
-                        TODAY
-                        <span class="pull-right"><b>12</b> <small>TICKETS</small></span>
-                    </li>
-                    <li>
-                        YESTERDAY
-                        <span class="pull-right"><b>15</b> <small>TICKETS</small></span>
-                    </li>
-                    <li>
-                        LAST WEEK
-                        <span class="pull-right"><b>90</b> <small>TICKETS</small></span>
-                    </li>
-                    <li>
-                        LAST MONTH
-                        <span class="pull-right"><b>342</b> <small>TICKETS</small></span>
-                    </li>
-                    <li>
-                        LAST YEAR
-                        <span class="pull-right"><b>4 225</b> <small>TICKETS</small></span>
-                    </li>
-                    <li>
-                        ALL
-                        <span class="pull-right"><b>8 752</b> <small>TICKETS</small></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div> -->
-    <!-- #END# Answered Tickets -->
-
 <div class="row clearfix">
     <!-- Seznam projektů -->
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

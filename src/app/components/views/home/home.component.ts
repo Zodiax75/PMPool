@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
   /* Line graf - vytizenost */
   PMcapacityChartData: ChartDataSets[] = [
     { data: [95, 97, 98, 95, 97, 95, 100, 95, 97, 100, 98, 95], label: 'Plánované vytížení PMs', datalabels: {color: 'rgba(55,203,221,0.6)', anchor: 'start', align: 'top', offset: 5} },
-    { data: [85, 72, 78, 75, 77, 75, 100, 95, 78], label: 'Skutečné vytížení PMs', datalabels: {color: 'rgba(238,81,134,0.6', anchor: 'start', align: 'top', offset: 5} },
+    { data: [85, 72, 78, 75, 77, 75, 90, 95, 78], label: 'Skutečné vytížení PMs', datalabels: {color: 'rgba(238,81,134,0.6', anchor: 'start', align: 'top', offset: 5} },
   ];
 
   PMcapacityChartLabels: Label[] = ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen','Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'];

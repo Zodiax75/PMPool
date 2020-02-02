@@ -17,46 +17,80 @@
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nepřihlášen</div>
                     <div class="email">Anonymní uživatel</div>
                 </div>
-              </ng-template>
+            </ng-template>
         </div>
         <!-- #User Info -->
-        <!-- Menu -->
-        <div class="menu">
+        <!-- Menu anonymous-->
+        <div *ngIf="user===null; else loggedUser" class="menu">
             <ul class="list">
                 <li class="header">HLAVNÍ MENU</li>
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <a [routerLink]="['/views/home']"><i class="material-icons">home</i> <span>Dashboard</span></a>
                 </li>
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                    <a [routerLink]="['/views/typography']"><i class="material-icons">rss_feed</i> <span>Novinky</span></a>
+                    <a [routerLink]="['/views/aboutPM3']"><i class="material-icons">help_outline</i> <span>O PM Pool III</span></a>
                 </li>
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                    <a [routerLink]="['/views/typography']"><i class="material-icons">pie_chart</i> <span>Reporting</span></a>
+                    <a [routerLink]="['/views/requestPM']"><i class="material-icons">face</i> <span>Žádost o PM</span></a>
                 </li>
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                    <a [routerLink]="['/views/typography']"><i class="material-icons">thumb_up</i> <span>Hodnocení</span></a>
+                    <a [routerLink]="['/views/reporting']"><i class="material-icons">pie_chart</i> <span>Reporting</span></a>
+                </li>
+                <li class="header">PŘIHLÁŠENÍ</li>
+                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a [routerLink]="['/auth/login']"><i class="material-icons">person</i> <span>Přihlášení</span></a>
                 </li>
                 <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                    <a [routerLink]="['/views/typography']"><i class="material-icons">timer</i> <span>TO DO List</span></a>
-                </li>
-                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                    <a [routerLink]="['/views/typography']"><i class="material-icons">chat</i> <span>Týmový chat</span></a>
-                </li>
-                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                    <a [routerLink]="['/views/typography']"><i class="material-icons">event</i> <span>Týmové akce</span></a>
-                </li>
-                
-                <li class="header">NASTAVENÍ</li>
-                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                    <a [routerLink]="['/views/home']"><i class="material-icons">build</i> <span>Nastavení</span></a>
-                </li>
-                <li class="header">ADMINISTRACE</li>
-                <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                    <a [routerLink]="['/views/home']"><i class="material-icons">person_add</i> <span>Správa uživatelů</span></a>
+                    <a [routerLink]="['/auth/register']"><i class="material-icons">lock</i> <span>Registrace</span></a>
                 </li>
             </ul>
         </div>
-        <!-- #Menu -->
+        <!-- #Menu anonymous-->
+        <!-- Menu admin-->
+        <ng-template #loggedUser>
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">HLAVNÍ MENU</li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <a [routerLink]="['/views/home']"><i class="material-icons">home</i> <span>Dashboard</span></a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <a [routerLink]="['/views/typography']"><i class="material-icons">rss_feed</i> <span>Novinky</span></a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <a [routerLink]="['/views/typography']"><i class="material-icons">pie_chart</i> <span>Reporting</span></a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <a [routerLink]="['/views/typography']"><i class="material-icons">thumb_up</i> <span>Hodnocení</span></a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <a [routerLink]="['/views/typography']"><i class="material-icons">extension</i> <span>Kompetenční model</span></a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <a [routerLink]="['/views/typography']"><i class="material-icons">timer</i> <span>TO DO List</span></a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <a [routerLink]="['/views/typography']"><i class="material-icons">chat</i> <span>Týmový chat</span></a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <a [routerLink]="['/views/typography']"><i class="material-icons">event</i> <span>Týmové akce</span></a>
+                    </li>
+                    
+                    <li class="header">NASTAVENÍ</li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <a [routerLink]="['/views/profile']"><i class="material-icons">person_outline</i> <span>Uživatelský profil</span></a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <a [routerLink]="['/views/settings']"><i class="material-icons">build</i> <span>Nastavení</span></a>
+                    </li>
+                    <!-- <li class="header">ADMINISTRACE</li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                        <a [routerLink]="['/views/home']"><i class="material-icons">person_add</i> <span>Správa uživatelů</span></a>
+                    </li> -->
+                </ul>
+            </div>
+        </ng-template>
+        <!-- #Menu logged -->
         <!-- Footer -->
         <div class="legal">
             <div class="copyright">

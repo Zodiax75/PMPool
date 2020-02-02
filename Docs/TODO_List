@@ -15,6 +15,43 @@ X ověření přihlášení v DB pri isLogged a CurrentUser
 X ověření přihlášení při přístupu na stránky (isLogged, CurrentUser)
 X odhlášení uživatele
 X Authentication guard a použití na Routes
+X Mockup pro anonymous dashboard
+- menu pro anonymous
+- menu pro Logged
+- menu pro admin
 - načtení a zobrazení statistických dat pro anonymní dashboard
 - forget password stranka
 - user profile stránka
+
+
+
+
+Menu:
+=====
+Anonymni:
+- Dashboard
+- O PM POOL III
+- Zadost o PM
+- Reporting
+-------------------
+- Přihlášení
+- Registrace
+
+
+Logged:
+- Dashboard
+- Ńovinky
+- Chat
+- Úkoly
+- Kompetenční model
+- OKRs a aktuální hodnocení
+- Události
+- Reporting
+---------------
+- Uživatelský profil
+- Nastavení
+
+
+Admin:
+- 
+
