@@ -1,3 +1,5 @@
+import { AboutPM3Component } from './aboutPM3/aboutPM3.component';
+import { RequestPMComponent } from './requestPM/requestPM.component';
 import { ChartsModule } from 'ng2-charts';
 
 import { NgModule } from '@angular/core';
@@ -121,7 +123,9 @@ import { BasicFormsComponent } from './forms/basic-forms/basic-forms.component';
     GoogleComponent,
     YandexComponent,
     JvectorComponent,
-    BasicFormsComponent
+    BasicFormsComponent,
+    RequestPMComponent,
+    AboutPM3Component
   ],
   providers: []
 })

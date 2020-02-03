@@ -1,3 +1,4 @@
+import { AboutPM3Component } from './aboutPM3/aboutPM3.component';
 import { AuthGuard } from './../../shared/authentication/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -110,6 +111,7 @@ const viewsRoutes: Routes = [
         { path: 'medias/carousel', component: CarouselComponent },
         { path: 'blank', component: BlankComponent },
         { path: 'pages/profile', component: ProfileComponent },
+        { path: 'aboutPM3', component: AboutPM3Component },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
     ]
   }
