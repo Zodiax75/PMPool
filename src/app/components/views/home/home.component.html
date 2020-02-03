@@ -54,8 +54,12 @@
 <div class="block-header">
     <p class="display-2">ZÁKLADNÍ INFORMACE</p>
     <p class="display-4">
-        In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
-        In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
+        Jeden ze tří týmů projektových manažerů v rámci PM poolu ČSOB. Pokrýváme všechny oblasti projektového řízení i obsahové oblasti jednotlivých domén jako Payments, Credits, Consumer Finance, Digital, Karty, SME/CORP apod. Rozumíme ICT, pomůžeme s procesy a provedeme Vás projektem od "a až do z".
+        <strong>Kontakt:</strong> Martin Nassler, 724 635 893, marnassler@csob.cz
+    </p>
+    <p class="display-2">NÁŠ CÍL</p>
+    <p class="display-4">
+        Naším cílem je poskytovat dlouhodobě kvalitní služby v rámci celé skupiny ČSOB, mít spokojené zákazníky (externí i interní) a být v ČSOB i mimo ní referencí projektového řízení. Mezi naše hodnoty patří <strong>důvěra, spolupráce, rozvoj, kvalita a ownership</strong>.
     </p>
 </div>
 <!-- #END# ZÁKLADNÍ INFORMACE -->
@@ -68,7 +72,7 @@
                     <div class="col-xs-12 col-sm-6">
                         <h2>POTŘEBUJETE PM?</h2>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="body">
                 <div class="lead">
@@ -78,7 +82,7 @@
                     <strong>Dejte nám, prosím, vědět pomocí poptávkového formuláře!</strong>
                 </p>
                 <p>
-                    Ideálně dostatečně předem, kapacity bývají blokovány dlouho dopředu. Aktuální stav dostupných kapacit 
+                    Ideálně dostatečně předem, kapacity bývají blokovány dlouho dopředu. Aktuální stav dostupných kapacit
                     můžete orientačně zjistit na grafu "Alokace projektových manažerů" níže. Jakmile budeme mít potřebné info, ozveme se Vám s možnostmi jak roli PM
                     obsadit.
                 </p>
@@ -104,7 +108,7 @@
                     <button type="button" class="btn btn-block bg-deep-orange waves-effect">
                         <i class="material-icons">face</i>
                         <span>ŽÁDOST O PM</span>
-                    </button>  
+                    </button>
                 </p>
             </div>
         </div>
@@ -118,18 +122,18 @@
                     <div class="col-xs-12 col-sm-6">
                         <h2>ÚSPĚŠNOST DODANÝCH PROJEKTŮ</h2>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="body bg-light-blue">
                 <div class="chart-wrapper">
 
-                    <canvas baseChart 
-                        [datasets]="ProjectSuccessRateChartData" 
-                        [labels]="ProjectSuccessRateChartLabels" 
+                    <canvas baseChart
+                        [datasets]="ProjectSuccessRateChartData"
+                        [labels]="ProjectSuccessRateChartLabels"
                         [options]="ProjectSuccessRateChartOptions"
-                        [colors]="ProjectSuccessRateChartColors" 
-                        [legend]="ProjectSuccessRateChartLegend" 
-                        [chartType]="ProjectSuccessRateChartType" 
+                        [colors]="ProjectSuccessRateChartColors"
+                        [legend]="ProjectSuccessRateChartLegend"
+                        [chartType]="ProjectSuccessRateChartType"
                         [plugins]="ProjectSuccessRateChartPlugins"
                         height="217px">
                     </canvas>
@@ -152,7 +156,7 @@
         </div>
     </div>
     <!-- #END# ÚSPĚŠNOST PROJEKTŮ -->
-</div>    
+</div>
 
 <div class="row clearfix">
     <!-- VYTÍŽENOST PM-->
@@ -163,17 +167,17 @@
                     <div class="col-xs-12 col-sm-6">
                         <h2>ALOKACE PROJEKTOVÝCH MANAŽERŮ</h2>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="body">
                 <div class="chart-wrapper">
-                    <canvas baseChart 
-                        [datasets]="PMcapacityChartData" 
-                        [labels]="PMcapacityChartLabels" 
+                    <canvas baseChart
+                        [datasets]="PMcapacityChartData"
+                        [labels]="PMcapacityChartLabels"
                         [options]="PMcapacityChartOptions"
-                        [colors]="PMcapacityChartColors" 
-                        [legend]="PMcapacityChartLegend" 
-                        [chartType]="PMcapacityChartType" 
+                        [colors]="PMcapacityChartColors"
+                        [legend]="PMcapacityChartLegend"
+                        [chartType]="PMcapacityChartType"
                         [plugins]="PMcapacityChartPlugins">
                     </canvas>
                 </div>
@@ -189,12 +193,12 @@
                     <div class="col-xs-12 col-sm-6">
                         <h2>ROZDĚLENÍ ROLÍ V PM POOL III</h2>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="body">
                 <div>Jak jsou rozdělení projektoví manažeři dle rolí:</div>
                 <div class="chart-wrapper">
-                    <canvas baseChart 
+                    <canvas baseChart
                     [data]="PMrolesChartData"
                     [labels]="PMrolesChartLabels"
                     [chartType]="PMrolesChartType"
@@ -205,7 +209,7 @@
         </div>
     </div>
     <!-- #END# ROLE PM -->
-</div>    
+</div>
 <div class="row clearfix">
     <!-- Seznam projektů -->
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
