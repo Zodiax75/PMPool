@@ -1,3 +1,4 @@
+import { DashboardService } from './../../../shared/dashboard/dashboard.service';
 import { Component, OnInit } from '@angular/core';
 import { ChartType, ChartDataSets } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -10,19 +11,13 @@ import { Label, MultiDataSet, Color } from 'ng2-charts';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
   /* Doughnut graf - ROLE */
   PMrolesChartLabels: Label[] = ['Junior', 'Standard', 'Senior', 'Externí', 'Jiné'];
   PMrolesChartData: MultiDataSet = [
     [3, 5, 9, 3, 5]
   ];
   PMrolesChartType: ChartType = 'doughnut';
-  
+
   PMrolesChartOptions = {
     responsive: true,
     animation: {
@@ -37,11 +32,19 @@ export class HomeComponent implements OnInit {
 
   /* Line graf - vytizenost */
   PMcapacityChartData: ChartDataSets[] = [
-    { data: [95, 97, 98, 95, 97, 95, 100, 95, 97, 100, 98, 95], label: 'Plánované vytížení PMs', datalabels: {color: 'rgba(55,203,221,0.6)', anchor: 'start', align: 'top', offset: 5} },
-    { data: [85, 72, 78, 75, 77, 75, 90, 95, 78], label: 'Skutečné vytížení PMs', datalabels: {color: 'rgba(238,81,134,0.6', anchor: 'start', align: 'top', offset: 5} },
+    { data: [95, 97, 98, 95, 97, 95, 100, 95, 97, 100, 98, 95],
+      label: 'Plánované vytížení PMs',
+      datalabels: {color: 'rgba(55,203,221,0.6)', anchor: 'start', align: 'top', offset: 5}
+    },
+    { data: [85, 72, 78, 75, 77, 75, 90, 95, 78],
+      label: 'Skutečné vytížení PMs',
+      datalabels: {color: 'rgba(238,81,134,0.6', anchor: 'start', align: 'top', offset: 5}
+    }
   ];
 
-  PMcapacityChartLabels: Label[] = ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen','Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'];
+  PMcapacityChartLabels: Label[] = [
+    'Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen','Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'
+  ];
 
   PMcapacityChartOptions = {
     responsive: true
@@ -68,7 +71,9 @@ export class HomeComponent implements OnInit {
     { data: [95, 97, 98, 95], label: 'Průměrné hodnocení projektů',lineTension: 0, datalabels: {display: false} }
   ];
 
-  ProjectSuccessRateChartLabels: Label[] = ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen','Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'];
+  ProjectSuccessRateChartLabels: Label[] = [
+    'Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen','Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'
+  ];
 
   ProjectSuccessRateChartOptions = {
     responsive: true,
@@ -80,7 +85,7 @@ export class HomeComponent implements OnInit {
               beginAtZero: true,
               suggestedMax: 100
           },
-          gridLines: {     
+          gridLines: {
             color: 'rgba(255,255,255,1)',
           }
       }],
@@ -104,4 +109,11 @@ export class HomeComponent implements OnInit {
   ProjectSuccessRateChartPlugins = [ChartDataLabels];
   ProjectSuccessRateChartType = 'line';
   /* END - Line graf - uspesnost projektu */
+
+  constructor(
+    private dashServ: DashboardService
+  ) { }
+
+  ngOnInit() {
+  }
 }

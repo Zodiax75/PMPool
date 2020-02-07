@@ -1,8 +1,8 @@
 import { UserCustomData } from './../../classes/UserCustomData';
 import { LoggingService } from './../logging/log.service';
 import { Injectable, NgZone } from '@angular/core';
-import { User } from "./../../classes/user";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { User } from './../../classes/user';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { take, first } from 'rxjs/operators';
@@ -32,13 +32,13 @@ export class AuthenticationService {
 
   // ověř existenci emailu v DB
   validateUserName(userName: string) {
-    var isEmailAvailable: boolean;
+    let isEmailAvailable: boolean;
 
     return this.afAuth.auth.fetchSignInMethodsForEmail(userName)
       .then((signInMethods)=> {
           isEmailAvailable=!signInMethods.includes('password');
           if (isEmailAvailable){
-            this.logServ.log('auth_serv. validate username','email '+userName+' available'); 
+            this.logServ.log('auth_serv. validate username','email '+userName+' available');
             this.emailTaken = false;
           }
           else{
@@ -84,7 +84,7 @@ export class AuthenticationService {
     await col.doc<UserCustomData>(email).get().toPromise()
       .then((data) => {
         const dt = data.data() as UserCustomData;
-        
+
         this.ucd = {
           displayName: dt.displayName,
           role: dt.role,
@@ -93,23 +93,23 @@ export class AuthenticationService {
         }
       })
       .catch((e) => {
-        this.logServ.log('auth_serv, read user cutom data','načtení custom uživatelských dat pro '+email+' selhalo. '+e.message);    
+        this.logServ.log('auth_serv, read user cutom data','načtení custom uživatelských dat pro '+email+' selhalo. '+e.message);
         throw(e);
       })
   }
 
   // Sign in with email/password
-  async SignIn(email, password) : Promise<any> { 
+  async SignIn(email, password) : Promise<any> {
     let fbLogin = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-    
-    
+
+
     this.ngZone.run(() => {});
-    
+
     this.logServ.log('auth_serv, sign in','user '+email+' přihlášen a uživatelská data načtena');
 
     let a = await this.ReadUserCustomData(email);
     this.logServ.log('auth_serv, sign in','custom uživatelská data pro uživatele '+email+' načtena');
-   
+
     // uloz one do pameti
     this.saveUserLocally(fbLogin.user,this.ucd);
 
@@ -117,19 +117,19 @@ export class AuthenticationService {
   }
 
   // Sign up with email/password
-  /* 
+  /*
     Information on different Error Codes:
     =====================================
       auth/email-already-in-use: Thrown if there already exists an account with the given email address.
       auth/invalid-email- Thrown if the email address is not valid.
       auth/operation-not-allowed: Thrown if email/password accounts are not enabled. Enable email/password accounts in the Firebase Console, under the Auth tab.
-      auth/weak-password: Thrown if the password is not strong enough. 
+      auth/weak-password: Thrown if the password is not strong enough.
   */
   SignUp(email: string, password: string, userData: UserCustomData) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.logServ.log('auth_serv, sign up','Uživatel '+result.user.email+' vytvořen v databázi');
-        
+
         // ulož uživatele do localstore
         this.saveUserLocally(result.user, userData);
         this.logServ.log('auth_serv, sign up','Uživatel '+result.user.email+' uložen v localstore');
@@ -138,7 +138,7 @@ export class AuthenticationService {
         // TODO: vyřešit verifikaci emailem
         /* Call the SendVerificaitonMail() function when new user sign up and returns promise */
         // this.SendVerificationMail();
-        
+
         // ulož custom uživatelská data
         this.SetUserData(result.user, userData)
           .then((result1) => {
@@ -194,7 +194,7 @@ export class AuthenticationService {
     } else {
       this.logServ.log('auth_serv, Verify User Is Logged In Firebase','Uživatel již nemá platnou autentikaci ve Firebase');
       this.ClearLocalUserStorage();
-    } 
+    }
   }
 
   // Vrací data aktuálního uživatele nebo null pokud není přihlášen00
@@ -210,7 +210,7 @@ export class AuthenticationService {
       user = null;
       userCust = null;
     }
-    
+
     // inicializuj uživatele
     var currUser: User = {
       uid: '',
@@ -222,7 +222,7 @@ export class AuthenticationService {
         isAdmin: false
       }
     }
-   
+
     if(user !== null && userCust !== null) {
       currUser.email = user.email;
       currUser.customData.displayName = userCust.displayName;
@@ -231,7 +231,7 @@ export class AuthenticationService {
       currUser.customData.role = userCust.role;
     } else {
       currUser = null;
-    } 
+    }
 
     // TODO: vyresit priznak verifikace emailu
     return (currUser);
@@ -245,7 +245,7 @@ export class AuthenticationService {
     //this.VerifyUserIsLoggedInFirebase();
 
     const user = JSON.parse(localStorage.getItem('user'));
-    
+
     if (user !== null) {
       this.logServ.log('auth_serv, isloggedIn','uživatel '+user.email+' má data v local store ');
       return(true);
