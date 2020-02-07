@@ -16,12 +16,15 @@ X ověření přihlášení při přístupu na stránky (isLogged, CurrentUser)
 X odhlášení uživatele
 X Authentication guard a použití na Routes
 X Mockup pro anonymous dashboard
-- menu pro anonymous
-- menu pro Logged
+X menu pro anonymous
+X menu pro Logged
+X aboutPM3 komponent
 - menu pro admin
 - načtení a zobrazení statistických dat pro anonymní dashboard
+- caching a ukladani static dat (best practice)
 - forget password stranka
 - user profile stránka
+- requestPM komponent
 
 
 
