@@ -15,7 +15,7 @@ declare function showNotification(colorName, text, placementFrom, placementAlign
 export class NavbarTopComponent implements OnInit {
 
   title: String = Config.APP.title;
-  user: User;
+  user: User = null;
 
   constructor(
       public authService: AuthenticationService,

@@ -8,14 +8,12 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { take, first } from 'rxjs/operators';
 import { database } from 'firebase';
 
-// TODO: vyřešit exception handling a logování
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  private userData: any; // Save logged in user data
+  private userData: any = null; // Save logged in user data
   public emailTaken: boolean;
   private ucd: UserCustomData;
   public CurrentUserChangedObservable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -110,6 +108,9 @@ export class AuthenticationService {
     let a = await this.ReadUserCustomData(email);
     this.logServ.log('auth_serv, sign in','custom uživatelská data pro uživatele '+email+' načtena');
 
+    // vymaz cache
+    this.ClearLocalUserStorage();
+
     // uloz one do pameti
     this.saveUserLocally(fbLogin.user,this.ucd);
 
@@ -129,6 +130,9 @@ export class AuthenticationService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.logServ.log('auth_serv, sign up','Uživatel '+result.user.email+' vytvořen v databázi');
+
+        // vymaz cache
+        this.ClearLocalUserStorage();
 
         // ulož uživatele do localstore
         this.saveUserLocally(result.user, userData);
@@ -199,8 +203,8 @@ export class AuthenticationService {
 
   // Vrací data aktuálního uživatele nebo null pokud není přihlášen00
   get currentUser(): User {
-    let user: any;
-    let userCust: any;
+    let user: any = null;
+    let userCust: any = null;
 
     if(this.isLoggedIn) {
       user = JSON.parse(localStorage.getItem('user'));
@@ -270,6 +274,8 @@ export class AuthenticationService {
   private ClearLocalUserStorage() {
     localStorage.removeItem('user');
     localStorage.removeItem('userCustData');
+    localStorage.removeItem('DashboardStats');
+    
     this.logServ.log('auth_serv, Clear Local User Storage','Lokální uživatelská data byla vymazána z local storage');
   }
 }

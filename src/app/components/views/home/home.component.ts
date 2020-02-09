@@ -1,3 +1,5 @@
+import { LoggingService } from './../../../shared/logging/log.service';
+import { DashboardData } from './../../../classes/dashboardData';
 import { DashboardService } from './../../../shared/dashboard/dashboard.service';
 import { Component, OnInit } from '@angular/core';
 import { ChartType, ChartDataSets } from 'chart.js';
@@ -110,10 +112,45 @@ export class HomeComponent implements OnInit {
   ProjectSuccessRateChartType = 'line';
   /* END - Line graf - uspesnost projektu */
 
+  dbData: DashboardData;
+
   constructor(
-    private dashServ: DashboardService
+    private dashServ: DashboardService,
+    private logServ: LoggingService
   ) { }
 
   ngOnInit() {
+    // ověř zda jsou data v cache a případně je načti
+    const aa = localStorage.getItem('DashboardStats');
+    console.log('AA: '+aa);
+
+    if(aa != null) {
+      // načti data z cache
+      console.log('AA1: '+aa);
+      this.dbData = JSON.parse(aa);
+      console.log('DBDBBB: '+this.dbData);
+      this.logServ.log('Home (nginit)', 'Dashboard statistiky načteny z lokální cache: '+JSON.stringify(this.dbData));      
+    } else {
+      this.logServ.log('Home (nginit)', 'Dashboard statistiky nejsou v lokální cache');
+      this.dashServ.RefreshDashboardStatistic()
+        .then((data) => {
+          const dbD = data.data() as DashboardData;
+          console.log('DBD: '+dbD);
+          
+
+          /* this.dbData.field1 = dbD.field1;
+          this.dbData.field2 = dbD.field2;
+          this.dbData.field3 = dbD.field3;
+          this.dbData.field4 = dbD.field4; */
+
+          this.logServ.log('Home (nginit)', 'Dashboard statistiky načteny z databáze: '+JSON.stringify(this.dbData));
+
+          localStorage.setItem('DashboardStats', JSON.stringify(this.dbData));
+          this.logServ.log('Home (nginit)', 'Dashboard statistiky uloženy v lokální cache');
+        })
+        .catch((e) => {
+          this.logServ.log('Home (nginit)', 'Chyba při načítaní Dashboard statistik z DB. '+e.message);
+        })
+    }
   }
 }
