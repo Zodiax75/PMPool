@@ -1,3 +1,4 @@
+import { MultiDataSet } from 'ng2-charts';
 import { Injectable } from '@angular/core';
 import { DashboardData } from './../../classes/dashboardData';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -27,7 +28,7 @@ export class DashboardService {
       }
 
       // načti data z DB
-    this.logServ.log('Refresh Dashboard Statistic', 'Načtena collection DashboardStatistic z DB');
+    this.logServ.log('Refresh Dashboard Statistic', 'Načtena collection DashboardStatistic z DB pro uživatele '+email);
 
     // načti detail pro daného uživatele
     return await this.afs.collection('DashboardStatistic').doc<DashboardData>(email).get().toPromise()

@@ -20,8 +20,8 @@ X menu pro anonymous
 X menu pro Logged
 X aboutPM3 komponent
 - menu pro admin
-- načtení a zobrazení statistických dat pro anonymní dashboard
-- caching a ukladani static dat (best practice)
+X načtení a zobrazení statistických dat pro anonymní dashboard
+X caching a ukladani static dat (best practice)
 - forget password stranka
 - user profile stránka
 - requestPM komponent

@@ -3,39 +3,81 @@
 </div>
 <!-- Widgets -->
 <div class="row clearfix">
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div *ngIf="!user; else loggedUser" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="info-box bg-pink hover-expand-effect">
             <div class="icon">
                 <i class="material-icons">group</i>
             </div>
             <div class="content">
                 <div class="text">POČET FTEs</div>
-                <div class="number">AAA</div>
+                <div class="number">{{this.dbData.field1}}</div>
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <ng-template #loggedUser>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-pink hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">playlist_add_check</i>
+                </div>
+                <div class="content">
+                    <div class="text">POČET ÚKOLŮ</div>
+                    <div class="number">{{this.dbData.field1}}</div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <div *ngIf="!user; else loggedUser1" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="info-box bg-cyan hover-expand-effect">
             <div class="icon">
                 <i class="material-icons">hourglass_empty</i>
             </div>
             <div class="content">
                 <div class="text">POČET PROJEKTŮ</div>
-                <div class="number">128</div>
+                <div class="number">{{this.dbData.field2}}</div>
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <ng-template #loggedUser1>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-cyan hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">format_list_numbered</i>
+                </div>
+                <div class="content">
+                    <div class="text">PRŮMĚR OKRs</div>
+                    <div class="number">{{this.dbData.field2}}%</div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <div *ngIf="!user; else loggedUser2" class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="info-box bg-light-green hover-expand-effect">
             <div class="icon">
                 <i class="material-icons">playlist_add_check</i>
             </div>
             <div class="content">
-                <div class="text">DOKONČENÝCH PROJEKTŮ</div>
-                <div class="number">12</div>
+                <div  class="text">DOKONČENÝCH PROJEKTŮ</div>
+                <div class="number">{{this.dbData.field3}}</div>
             </div>
         </div>
     </div>
+    <ng-template #loggedUser2>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-light-green hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">chat</i>
+                </div>
+                <div class="content">
+                    <div  class="text">PŘÍSPĚVKŮ V CHATU</div>
+                    <div class="number">{{this.dbData.field3}}</div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="info-box bg-orange hover-expand-effect">
             <div class="icon">
@@ -43,7 +85,7 @@
             </div>
             <div class="content">
                 <div class="text">PRŮMĚRNÉ HODNOCENÍ</div>
-                <div class="number">90%</div>
+                <div class="number">{{this.dbData.field4}}%</div>
             </div>
         </div>
     </div>

@@ -231,7 +231,7 @@ export class AuthenticationService {
       currUser.email = user.email;
       currUser.customData.displayName = userCust.displayName;
       currUser.customData.isAdmin = userCust.isAdmin;
-      currUser.customData.photoURL = userCust.photeURL;
+      currUser.customData.photoURL = userCust.photoURL;
       currUser.customData.role = userCust.role;
     } else {
       currUser = null;

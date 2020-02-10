@@ -2,23 +2,28 @@
     <!-- Left Sidebar -->
     <aside id="leftsidebar" class="sidebar">
         <!-- User Info -->
-        <div class="user-info">
+        <div *ngIf="user; else anonymousUserInfo" class="user-info">
             <div class="image">
-                <img src="assets/images/user.png" width="48" height="48" alt="User" />
+                <img src="assets/images/user_profiles/{{this.user.customData.photoURL}}" width="48" height="48" alt="User" />
             </div>
             <!-- Přihlášený uživatel -->
-            <div *ngIf="user; else anonymousUserInfo" class="info-container">               
+            <div class="info-container">               
                 <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.user.customData.displayName}}</div>
                 <div class="email">{{this.user.customData.role}}</div>
             </div>
-            <!-- Nepřihlášený uživatel -->
-            <ng-template #anonymousUserInfo>
+        </div>
+        <!-- Nepřihlášený uživatel -->
+        <ng-template #anonymousUserInfo>
+            <div class="user-info">
+                <div class="image">
+                    <img src="assets/images/user.png" width="48" height="48" alt="User" />
+                </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nepřihlášen</div>
                     <div class="email">Anonymní uživatel</div>
                 </div>
-            </ng-template>
-        </div>
+            </div>
+        </ng-template>
         <!-- #User Info -->
         <!-- Menu anonymous-->
         <div *ngIf="user===null; else loggedUser" class="menu">

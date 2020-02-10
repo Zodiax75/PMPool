@@ -6,6 +6,8 @@ import { ChartType, ChartDataSets } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 import { Label, MultiDataSet, Color } from 'ng2-charts';
+import { AuthenticationService } from './../../../shared/authentication/auth.service';
+import { User } from './../../../classes/user';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +16,8 @@ import { Label, MultiDataSet, Color } from 'ng2-charts';
 })
 export class HomeComponent implements OnInit {
   /* Doughnut graf - ROLE */
-  PMrolesChartLabels: Label[] = ['Junior', 'Standard', 'Senior', 'Externí', 'Jiné'];
-  PMrolesChartData: MultiDataSet = [
-    [3, 5, 9, 3, 5]
-  ];
+  PMrolesChartLabels: Label[]; // = ['Junior', 'Standard', 'Senior', 'Externí', 'Jiné'];
+  PMrolesChartData: MultiDataSet; // = [[3, 5, 9, 3, 5]];
   PMrolesChartType: ChartType = 'doughnut';
 
   PMrolesChartOptions = {
@@ -112,45 +112,81 @@ export class HomeComponent implements OnInit {
   ProjectSuccessRateChartType = 'line';
   /* END - Line graf - uspesnost projektu */
 
-  dbData: DashboardData;
+  private dbData: DashboardData = {
+    field1: 0,
+    field2: 0,
+    field3: 0,
+    field4: 0
+  };
+
+  private user: User;
 
   constructor(
+    public authService: AuthenticationService,
     private dashServ: DashboardService,
     private logServ: LoggingService
-  ) { }
+  ) {
+    // načti aktuálního uživatele
+    this.user = this.authService.currentUser;
+   }
 
   ngOnInit() {
-    // ověř zda jsou data v cache a případně je načti
+    // ověř zda jsou data pro dashboard v cache a případně je načti
     const aa = localStorage.getItem('DashboardStats');
-    console.log('AA: '+aa);
-
+    
     if(aa != null) {
-      // načti data z cache
-      console.log('AA1: '+aa);
-      this.dbData = JSON.parse(aa);
-      console.log('DBDBBB: '+this.dbData);
-      this.logServ.log('Home (nginit)', 'Dashboard statistiky načteny z lokální cache: '+JSON.stringify(this.dbData));      
+        // načti data z cache
+        this.dbData = JSON.parse(aa);
+        this.logServ.log('Home (nginit)', 'Dashboard statistiky načteny z lokální cache: '+JSON.stringify(this.dbData));      
     } else {
-      this.logServ.log('Home (nginit)', 'Dashboard statistiky nejsou v lokální cache');
-      this.dashServ.RefreshDashboardStatistic()
-        .then((data) => {
-          const dbD = data.data() as DashboardData;
-          console.log('DBD: '+dbD);
-          
+        this.logServ.log('Home (nginit)', 'Dashboard statistiky nejsou v lokální cache');
+        this.dashServ.RefreshDashboardStatistic()
+          .then((data) => {
+            const dbD = data.data() as DashboardData;         
+            this.logServ.log('Home (nginit)', 'Dashboard statistiky načteny z databáze: '+JSON.stringify(dbD));      
+            this.dbData = dbD;
 
-          /* this.dbData.field1 = dbD.field1;
-          this.dbData.field2 = dbD.field2;
-          this.dbData.field3 = dbD.field3;
-          this.dbData.field4 = dbD.field4; */
-
-          this.logServ.log('Home (nginit)', 'Dashboard statistiky načteny z databáze: '+JSON.stringify(this.dbData));
-
-          localStorage.setItem('DashboardStats', JSON.stringify(this.dbData));
-          this.logServ.log('Home (nginit)', 'Dashboard statistiky uloženy v lokální cache');
-        })
-        .catch((e) => {
-          this.logServ.log('Home (nginit)', 'Chyba při načítaní Dashboard statistik z DB. '+e.message);
-        })
+            localStorage.setItem('DashboardStats', JSON.stringify(dbD));
+            this.logServ.log('Home (nginit)', 'Dashboard statistiky uloženy v lokální cache');
+          })
+          .catch((e) => {
+            this.logServ.log('Home (nginit)', 'Chyba při načítaní Dashboard statistik z DB. '+e.message);
+          })
     }
+    // END: dashboard statistic
+
+    // Načti data pro PM roles statistic
+    const pmroles = localStorage.getItem('PMrolesStats');
+    
+    if(pmroles != null) {
+        // načti data z cache
+        let pmr = JSON.parse(pmroles);
+        this.logServ.log('Home (nginit)', 'PM roles statistiky načteny z lokální cache: '+JSON.stringify(pmr));      
+
+        // namapuj na promenne ChartJS
+        this.MapPMrolesData(pmr);
+    } else {
+        this.logServ.log('Home (nginit)', 'PM roles statistiky nejsou v lokální cache');
+
+        // TODO zavolej DB a nacti data za aktualni rok, parse a uloz do session
+        /* this.dashServ.RefreshDashboardStatistic()
+          .then((data) => {
+            const dbD = data.data() as DashboardData;         
+            this.logServ.log('Home (nginit)', 'Dashboard statistiky načteny z databáze: '+JSON.stringify(dbD));      
+            this.dbData = dbD;
+
+            localStorage.setItem('DashboardStats', JSON.stringify(dbD));
+            this.logServ.log('Home (nginit)', 'Dashboard statistiky uloženy v lokální cache');
+          })
+          .catch((e) => {
+            this.logServ.log('Home (nginit)', 'Chyba při načítaní Dashboard statistik z DB. '+e.message);
+          }) */
+    }
+    // END: PM roles statistic
+  }
+
+  // priprav data pro doughnut graf PM roles
+  private MapPMrolesData(data: any) {
+    
   }
 }
