@@ -1,3 +1,4 @@
+import { Project } from './../../../classes/Project';
 import { LoggingService } from './../../../shared/logging/log.service';
 import { DashboardData } from './../../../classes/dashboardData';
 import { DashboardService } from './../../../shared/dashboard/dashboard.service';
@@ -8,6 +9,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Label, MultiDataSet, Color } from 'ng2-charts';
 import { AuthenticationService } from './../../../shared/authentication/auth.service';
 import { User } from './../../../classes/user';
+import { analytics } from 'firebase';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +17,12 @@ import { User } from './../../../classes/user';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  // seznam pro tabulku projektů
+  private projects: Project[];
+
   /* Doughnut graf - ROLE */
   PMrolesChartLabels: Label[]; // = ['Junior', 'Standard', 'Senior', 'Externí', 'Jiné'];
-  PMrolesChartData: MultiDataSet; // = [[3, 5, 9, 3, 5]];
+  PMrolesChartData: MultiDataSet = []; // = [[3, 5, 9, 3, 5]];
   PMrolesChartType: ChartType = 'doughnut';
 
   PMrolesChartOptions = {
@@ -70,7 +75,7 @@ export class HomeComponent implements OnInit {
 
   /* Line graf - uspesnost projektů */
   ProjectSuccessRateChartData: ChartDataSets[] = [
-    { data: [95, 97, 98, 95], label: 'Průměrné hodnocení projektů',lineTension: 0, datalabels: {display: false} }
+    { data: [80,90,75,93,88], label: 'Průměrné hodnocení projektů',lineTension: 0, datalabels: {display: false} }
   ];
 
   ProjectSuccessRateChartLabels: Label[] = [
@@ -168,25 +173,28 @@ export class HomeComponent implements OnInit {
     } else {
         this.logServ.log('Home (nginit)', 'PM roles statistiky nejsou v lokální cache');
 
-        // TODO zavolej DB a nacti data za aktualni rok, parse a uloz do session
-        /* this.dashServ.RefreshDashboardStatistic()
+        this.dashServ.RefreshPMRolesStatistic(new Date().getFullYear())
           .then((data) => {
-            const dbD = data.data() as DashboardData;         
-            this.logServ.log('Home (nginit)', 'Dashboard statistiky načteny z databáze: '+JSON.stringify(dbD));      
-            this.dbData = dbD;
-
-            localStorage.setItem('DashboardStats', JSON.stringify(dbD));
-            this.logServ.log('Home (nginit)', 'Dashboard statistiky uloženy v lokální cache');
+            let pmrolesData = JSON.stringify(data.data());
+            
+            this.logServ.log('Home (nginit)', 'PM roles statistiky načteny z databáze: '+pmrolesData);      
+            this.MapPMrolesData(data.data());
+        
+            localStorage.setItem('PMrolesStats', pmrolesData);
+            this.logServ.log('Home (nginit)', 'PM roles statistiky uloženy v lokální cache'); 
           })
           .catch((e) => {
-            this.logServ.log('Home (nginit)', 'Chyba při načítaní Dashboard statistik z DB. '+e.message);
-          }) */
+            this.logServ.log('Home (nginit)', 'Chyba při načítaní PM roles statistik z DB. '+e.message);
+          })
     }
     // END: PM roles statistic
   }
 
   // priprav data pro doughnut graf PM roles
   private MapPMrolesData(data: any) {
-    
+    this.logServ.log('Map PMroles Data', 'Mapuji PM roles statistiky: '+JSON.stringify(data));    
+
+    this.PMrolesChartLabels = Object.keys(data);
+    this.PMrolesChartData.push.apply(this.PMrolesChartData, <number[]>Object.values(data));
   }
 }

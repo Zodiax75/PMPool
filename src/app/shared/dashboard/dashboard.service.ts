@@ -33,4 +33,18 @@ export class DashboardService {
     // načti detail pro daného uživatele
     return await this.afs.collection('DashboardStatistic').doc<DashboardData>(email).get().toPromise()
   }
+
+  public async RefreshPMRolesStatistic(year?: number) {
+    if(year === undefined) {
+      // načti detail pro všechny roky
+      this.logServ.log('Refresh PM Roles Statistic', 'Načtena collection PMRoles Statistics z DB pro všechny roky ');  
+      // TODO: nacteni vsech zaznamu za vsechny roky
+
+    } else {
+      // načti detail pro daný rok
+      this.logServ.log('Refresh PM Roles Statistic', 'Načtena collection PMRoles Statistics z DB pro rok '+year);
+      
+      return await this.afs.collection('PMsRoleStats').doc(year.toString()).get().toPromise()
+    }
+  }
 }
