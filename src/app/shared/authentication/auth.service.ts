@@ -275,6 +275,8 @@ export class AuthenticationService {
     localStorage.removeItem('user');
     localStorage.removeItem('userCustData');
     localStorage.removeItem('DashboardStats');
+    localStorage.removeItem('PMrolesStats');
+    localStorage.removeItem('Projects');
     
     this.logServ.log('auth_serv, Clear Local User Storage','Lokální uživatelská data byla vymazána z local storage');
   }

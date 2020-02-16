@@ -272,86 +272,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>GC00001</td>
-                                <td>Rachot</td>
-                                <td><span class="label bg-green">Běží</span></td>
-                                <td>Martin Nassler</td>
+                            <tr *ngFor="let p of projects">
+                                <td>{{p.id}}</td>
+                                <td>{{p.name}}</td>
+                                <td><span class="label bg-{{p.color}}">{{p.status}}</span></td>
+                                <td>{{p.pm}}</td>
                                 <td>
                                     <div class="progress">
-                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="width: 62%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>GI00002</td>
-                                <td>Online Sales</td>
-                                <td><span class="label bg-green">Běží</span></td>
-                                <td>Václav Mařík</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>GX00003</td>
-                                <td>JIRA for mobile</td>
-                                <td><span class="label bg-red">Zastaven</span></td>
-                                <td>Vladimír Kaplan</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-light-blue" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>GX322144</td>
-                                <td>S3 decommission</td>
-                                <td><span class="label bg-orange">Čeká na schválení</span></td>
-                                <td>Zdeněk Rybnikář</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>GI235645</td>
-                                <td>DI4R</td>
-                                <td>
-                                    <span class="label bg-yellow">Varování</span>
-                                </td>
-                                <td>Radka Kaletová</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-red" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width: 87%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>GI45874</td>
-                                <td>CEB stabilizace</td>
-                                <td>
-                                    <span class="label bg-red">Problém</span>
-                                </td>
-                                <td>Tomáš Stegura</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-red" role="progressbar" aria-valuenow="27" aria-valuemin="0" aria-valuemax="100" style="width: 27%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>GC98745</td>
-                                <td>Flexible office</td>
-                                <td>
-                                    <span class="label bg-grey">Hotovo</span>
-                                </td>
-                                <td>Monika Buřičová</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-grey" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                                        <div class="progress-bar bg-{{p.color}}" role="progressbar" aria-valuenow=62 aria-valuemin="0" aria-valuemax="100" [style.width]="p.percentDone"></div>
                                     </div>
                                 </td>
                             </tr>

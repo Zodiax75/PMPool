@@ -1,4 +1,3 @@
-import { Project } from './../../../classes/Project';
 import { LoggingService } from './../../../shared/logging/log.service';
 import { DashboardData } from './../../../classes/dashboardData';
 import { DashboardService } from './../../../shared/dashboard/dashboard.service';
@@ -9,7 +8,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Label, MultiDataSet, Color } from 'ng2-charts';
 import { AuthenticationService } from './../../../shared/authentication/auth.service';
 import { User } from './../../../classes/user';
-import { analytics } from 'firebase';
+import { Project } from './../../../classes/Project';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +16,6 @@ import { analytics } from 'firebase';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  // seznam pro tabulku projektů
   private projects: Project[];
 
   /* Doughnut graf - ROLE */
@@ -188,6 +186,27 @@ export class HomeComponent implements OnInit {
           })
     }
     // END: PM roles statistic
+
+    // Načti data pro Projekty
+    const projs = localStorage.getItem('Projects');
+        
+    if(projs != null) {
+        // načti data z cache
+        let pmr = JSON.parse(projs);
+        this.logServ.log('Home (nginit)', 'Seznam projektů načten z lokální cache');      
+
+        this.projects = pmr;
+    } else {
+        this.logServ.log('Home (nginit)', 'Seznam projektů není v lokální cache');
+
+        this.dashServ.RefreshProjectList()
+         .then((data) => {
+          this.projects = this.dashServ.projectsList;
+        })
+    }
+    // END: Project list
+
+    
   }
 
   // priprav data pro doughnut graf PM roles
