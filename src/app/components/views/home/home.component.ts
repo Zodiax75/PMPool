@@ -52,7 +52,15 @@ export class HomeComponent implements OnInit {
   ];
 
   PMcapacityChartOptions = {
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero: true,
+              suggestedMax: 150
+          }
+      }]
+    }
   };
 
   PMcapacityChartColors: Color[] = [
