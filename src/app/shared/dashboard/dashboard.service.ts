@@ -12,6 +12,9 @@ export class DashboardService {
 
   public projectsList: Project[] = new Array();
 
+  public PMUsagePlan: number[] = new Array();
+  public PMUsageActuals: number[] = new Array();
+
   constructor(
     private afs: AngularFirestore,
     private logServ: LoggingService,
@@ -76,5 +79,34 @@ export class DashboardService {
     }
 
     
+  }
+
+  public async RefreshPMUsageStats() {
+    let cntP: number;
+    let cntA: number;
+
+
+    this.logServ.log('Refresh PM Usage Stats', 'Načtena celá collection PMUsageStats z DB');
+      
+    let col = await this.afs.collection('PMUsageStats');
+    col.ref.get().then((data) => {
+      data.forEach((key) => {
+        let p = key.data();
+        
+        for(let i=1; i!=13; i++) {
+          if(key.id == 'Plan') {
+            cntP = this.PMUsagePlan.push(p[i]);
+          } else if(key.id == 'Actual') {
+              if(p[i] > 0)
+                cntA = this.PMUsageActuals.push(p[i]);  // započti a přidej jen nenulové hodnoty
+          }
+        }
+      })
+      
+      localStorage.setItem('PMUsageStatsPlan', JSON.stringify(this.PMUsagePlan));
+      localStorage.setItem('PMUsageStatsActual', JSON.stringify(this.PMUsageActuals));
+      
+      this.logServ.log('Refresh PM Usage Stats', 'Přidáno celkem '+cntP+' plánovaných a '+cntA+' aktuálních kapacit a uloženo v lokální cache');
+    })       
   }
 }

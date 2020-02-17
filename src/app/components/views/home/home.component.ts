@@ -37,11 +37,11 @@ export class HomeComponent implements OnInit {
 
   /* Line graf - vytizenost */
   PMcapacityChartData: ChartDataSets[] = [
-    { data: [95, 97, 98, 95, 97, 95, 100, 95, 97, 100, 98, 95],
+    { /* data: [95, 97, 98, 95, 97, 95, 100, 95, 97, 100, 98, 95], */
       label: 'Plánované vytížení PMs',
       datalabels: {color: 'rgba(55,203,221,0.6)', anchor: 'start', align: 'top', offset: 5}
     },
-    { data: [85, 72, 78, 75, 77, 75, 90, 95, 78],
+    { /* data: [85, 72, 78, 75, 77, 75, 90, 95, 78], */
       label: 'Skutečné vytížení PMs',
       datalabels: {color: 'rgba(238,81,134,0.6', anchor: 'start', align: 'top', offset: 5}
     }
@@ -206,7 +206,29 @@ export class HomeComponent implements OnInit {
     }
     // END: Project list
 
-    
+    // Načti data pro PM Usage Stats
+    const pmU_P = localStorage.getItem('PMUsageStatsPlan');
+    const pmU_A = localStorage.getItem('PMUsageStatsActual');
+        
+    if(pmU_A != null && pmU_P != null) {
+        // načti data z cache
+        let pmrA = JSON.parse(pmU_A);
+        this.logServ.log('Home (nginit)', 'Seznam aktuálních kapacit PM načten z lokální cache');      
+        let pmrP = JSON.parse(pmU_P);
+        this.logServ.log('Home (nginit)', 'Seznam plánovaných kapacit PM načten z lokální cache');      
+
+        this.PMcapacityChartData[0].data = pmrP;
+        this.PMcapacityChartData[1].data = pmrA;
+    } else { 
+        this.logServ.log('Home (nginit)', 'Seznam PM Usage Stats není v lokální cache');
+
+        this.dashServ.RefreshPMUsageStats()
+         .then((data) => {
+          this.PMcapacityChartData[0].data = this.dashServ.PMUsagePlan;
+          this.PMcapacityChartData[1].data = this.dashServ.PMUsageActuals;
+        })
+    }
+    // END: PM Usage Stats
   }
 
   // priprav data pro doughnut graf PM roles
